@@ -117,13 +117,8 @@ if (!($password == $confirmPassword)) {
 
                 <input class="btn btn-outline-primary" type="button" onclick="location.href='delete.php?del=<?php echo $res['customer_id'] ?>';" value="Delete" />
                 <input class="btn btn-outline-primary" type="button" onclick="location.href='edit.php?getId=<?php echo $res['customer_id'] ?>';" value="Edit" />
-
-                    <input class="btn btn-outline-primary" type="button" onclick="location.href='bill.php?getId=<?php echo $res['customer_id'] ?>';" value="Generate Bill" />
-                <?php  }
-
-                  
-
-                 ?>
+                <input class="btn btn-outline-primary" type="button" onclick="location.href='bill.php?getId=<?php echo $res['customer_id'] ?>';" value="Generate Bill" />
+                <?php  } ?>
 
                <!-- <a href="delete.php?del=<?php echo $res['customer_id'] ?>">Delete</a><br>
                <a href="edit.php?getId=<?php echo $res['customer_id'] ?>">Edit</a> -->

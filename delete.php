@@ -28,7 +28,8 @@
       $customerId = $row['customer_id'];
       header("location:bill.php?getId=$customerId");
     }
-  } else {
+  }
+  if (isset($_GET['del'])) {
     $id = $_GET['del'];
     $sql = "delete from customer where customer_id = '".$id."'";
     $result = mysqli_query($connection, $sql);
@@ -38,7 +39,7 @@
     } else {
       echo "something went wrong";
     }
-  }
+   }
 
 
 
