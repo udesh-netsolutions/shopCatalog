@@ -84,6 +84,8 @@
                  <td><?php echo  $row["date"];?></td>
                  <td><?php if($row["status"] == false) {
                    echo "Pending";
+                 } else {
+                   echo "Paid";
                  } ?></td>
                  <td>
 
@@ -103,7 +105,7 @@
      </body>
    </html>
 
-<?php } if (isset($_GET["customerId"])) {
+<?php } elseif (isset($_GET["customerId"])) {
   $customerId = $_GET["customerId"];
 
   ?>
