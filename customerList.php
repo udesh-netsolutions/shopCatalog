@@ -117,8 +117,17 @@ if (!($password == $confirmPassword)) {
 
                 <input class="btn btn-outline-primary" type="button" onclick="location.href='delete.php?del=<?php echo $res['customer_id'] ?>';" value="Delete" />
                 <input class="btn btn-outline-primary" type="button" onclick="location.href='edit.php?getId=<?php echo $res['customer_id'] ?>';" value="Edit" />
-                <input class="btn btn-outline-primary" type="button" onclick="location.href='bill.php?getId=<?php echo $res['customer_id'] ?>';" value="Generate Bill" />
-                <?php  } ?>
+                <?php
+                $result = $connection->query("select * from cart where customer_id = '".$res['customer_id']."' and request = 'Requested'");
+                  if($result->num_rows != 0) { ?>
+                    <input class="btn btn-outline-primary" type="button" onclick="location.href='bill.php?getId=<?php echo $res['customer_id'] ?>';" value="Generate Bill" />
+                <?php  }
+
+                 }
+                 ?>
+
+
+
 
                <!-- <a href="delete.php?del=<?php echo $res['customer_id'] ?>">Delete</a><br>
                <a href="edit.php?getId=<?php echo $res['customer_id'] ?>">Edit</a> -->

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Login 08</title>
+  	<title>Customer Form</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -21,7 +21,7 @@
 		      	<div class="icon d-flex align-items-center justify-content-center">
 		      		<span class="fa fa-user-o"></span>
 		      	</div>
-		      	<h3 class="text-center mb-4">Sign Up</h3>
+		      	<h3 class="text-center mb-4">Customer Form</h3>
 						<form action="customerList.php" class="login-form" method="post">
 		      		<div class="form-group">
 		      			<input type="text" class="form-control rounded-left" name="fname" placeholder="First Name" required>
@@ -48,7 +48,7 @@
               <p class="text-danger"><?php if(isset($_GET["phoneError"])) {echo $_GET["phoneError"];} ?></p>
               </div>
 	            <div class="form-group">
-	            	<button type="submit" name="button" class="btn btn-primary rounded submit p-3 px-5">Get Started</button>
+	            	<button type="submit" name="button" class="btn btn-primary rounded submit p-3 px-5">ADD</button>
 	            </div>
 	          </form>
 	        </div>

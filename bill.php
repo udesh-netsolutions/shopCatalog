@@ -87,7 +87,8 @@
            <td>Rs. <?php echo $totalAmount ?></td>
          </tfoot>
        </table>
-       <input class="btn btn-outline-info invoiceBtn" type="submit" name="invoice" onclick="location.href='invoice.php'" value="Generate invoice">
+       <input class="btn btn-outline-info" type="button" name="invoice" onclick="location.href='invoice.php?totalAmount=<?php echo $totalAmount ?>&customerId=<?php echo $id ?>'" value="Generate invoice">
+       <input class="btn btn-outline-info" type="button" name="PreviousInvoice" onclick="location.href='invoice.php?customerId=<?php echo $id ?>'" value="Previous invoice">
      </div>
 
 

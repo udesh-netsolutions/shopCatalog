@@ -4,6 +4,20 @@ session_start();
 
   //$customerId = $_GET["customerId"];
 
+  if(isset($_POST["request"])) {
+    $sql = "update cart set request = 'Requested' where customer_id='".$_SESSION["customerId"]."'";
+    $result = mysqli_query($connection, $sql);
+    if($result) {
+      header("location:manageCart.php");
+    }
+  }
+  if(isset($_POST["removeRequest"])) {
+    $sql = "update cart set request = null where customer_id='".$_SESSION["customerId"]."'";
+    $result = mysqli_query($connection, $sql);
+    if($result) {
+      header("location:manageCart.php");
+    }
+  }
   if(isset($_POST["button"])) {
     if (isset($_session["cart"])) {
       $sessionArrayId = array_column($_SESSION["cart"], "productId");
@@ -33,7 +47,6 @@ session_start();
     }
   }
 
-
  ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -51,6 +64,9 @@ session_start();
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="customerInvoice.php">Invoice</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link active" href="customerPanel.php">Products</a>
             </li>
@@ -87,11 +103,18 @@ session_start();
               <td>
                 <input class="btn btn-sm btn-warning"type="button" name="" value="Edit" onclick="location.href='editItem.php?editItemId=<?php echo $row["id"] ?>'">
                 <input class="btn btn-sm btn-danger"type="button" name="" value="Remove" onclick="location.href='delete.php?removeItemId=<?php echo $row["id"] ?>'">
+                <?php echo $row["request"]; ?>
               </td>
             </tr>
         <?php  } ?>
         </tbody>
       </table>
+      <form class="" action="manageCart.php?removeItemId=<?php echo $_SESSION["customerId"] ?>" method="post">
+        <button class="btn btn-dark" type="submit" name="request">Request Bill</button>
+      </form>
+      <form class="" action="manageCart.php?removeItemId=<?php echo $_SESSION["customerId"] ?>" method="post">
+        <button class="btn btn-outline-dark" type="submit" name="removeRequest">Remove Request</button>
+      </form>
     </div>
 
 

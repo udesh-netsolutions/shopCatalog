@@ -64,7 +64,7 @@
           <?php   while($row = mysqli_fetch_array($res)) {?>
 
           <tr>
-            <td><?php echo "<img src='data:image;base64,'".base64_encode($row['product_image'])."' alt='image'>"?></td>
+            <td><img src="<?php echo $row["product_image"] ?>" alt="cap" width="200px" height="200px"></td>
             <td><?php echo $row['product_title']; ?></td>
             <td><?php echo $row['product_desc']; ?></td>
             <td><?php echo $row['product_price']; ?></td>

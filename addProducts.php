@@ -2,12 +2,16 @@
   include "connection.php";
 
   if(isset($_POST["button"])) {
-    $productImage = $_POST["img"];
+
+    $imgName = $_FILES["img"]["name"];
+    $tmpName = $_FILES["img"]["tmp_name"];
+    $folder = "images/" . $imgName;
+    move_uploaded_file($tmpName, $folder);
     $productTitle = $_POST["title"];
     $productDesc = $_POST["productDesc"];
     $productPrice = $_POST["price"];
 
-    $query = "insert into products (product_image, product_title, product_desc, product_price) values ('".$productImage."', '".$productTitle."', '".$productDesc."', '".$productPrice."')";
+    $query = "insert into products (product_image, product_title, product_desc, product_price) values ('".$folder."', '".$productTitle."', '".$productDesc."', '".$productPrice."')";
     $res = mysqli_query($connection, $query);
     if($res) {
       header("location:products.php");
@@ -37,7 +41,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Products</a>
+              <a class="nav-link active" aria-current="page" href="products.php">Products</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" href="customerList.php">Customers</a>
@@ -54,7 +58,7 @@
     </nav>
     <div class="container">
       <h1>Add Products</h1>
-      <form class="form-inline" action="addProducts.php" method="post">
+      <form class="form-inline" action="addProducts.php" method="post" enctype="multipart/form-data">
         <div class="form-group">
           <label for="">Add Product Image :</label>
           <input class="form-control rounded-left" type="file" name="img" value="" accept="image/*" required>

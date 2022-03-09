@@ -29,10 +29,11 @@
           $_SESSION["customerId"] = $row["customer_id"];
           $_SESSION["email"] = $row["email"];
           $_SESSION["status"] = $row["status"];
-          header("location:admin.php");
+          header("location:customerList.php");
       } elseif ($row['email'] === $email && $row['password'] === $password && $row["status"] == false) {
           session_start();
           $_SESSION["customerId"] = $row["customer_id"];
+          $_SESSION["firstName"] = $row["first_name"];
           $_SESSION["email"] = $row["email"];
           $_SESSION["status"] = $row["status"];
           //$customerId = $row["customer_id"];

@@ -25,12 +25,15 @@ session_start();
        <body>
          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
            <div class="container-fluid">
-             <a class="navbar-brand" href="customerPanel.php">Customer</a>
+             <a class="navbar-brand" href="customerPanel.php">Customer,(<?php echo $_SESSION["firstName"]; ?>)</a>
              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
              </button>
              <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                <ul class="navbar-nav">
+                 <li class="nav-item">
+                   <a class="nav-link active" href="customerInvoice.php">Invoice</a>
+                 </li>
                  <li class="nav-item">
                    <a class="nav-link active" href="manageCart.php">Mycart</a>
                  </li>
@@ -48,7 +51,7 @@ session_start();
                  <div class="card w-75 mt-4 mx-5">
                    <div class="row d-flex">
                      <div class="col-md-4">
-                       <img src="" alt="image">
+                       <img src="<?php echo $row["product_image"] ?>" alt="image" height="200px" width="200px">
                      </div>
                      <div class="col-md-8">
                       <h3><?php echo $row["product_title"];?></h3>
