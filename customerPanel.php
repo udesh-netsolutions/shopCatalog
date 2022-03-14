@@ -5,7 +5,10 @@ session_start();
   //$customerId = $_GET["customerId"];
   $query = "select * from products";
   $res = mysqli_query($connection, $query);
+  if(isset($_GET["itemAdded"])) {
+    echo "<div class='alert alert-success alert-dismissible'> <strong>Item Added to cart</strong><a href='' class='close btn' data-dismiss='alert' aria-label='close' style='text-align:right;'>&times;</a></div>";
 
+  }
  ?>
 
  <!DOCTYPE html>
@@ -20,7 +23,24 @@ session_start();
        <head>
          <meta charset="utf-8">
          <title>Customer</title>
-         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+       	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+       	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="css/style.css">
+
+       	<link rel="stylesheet" href="styles.css">
+
+         <script src="js/jquery.min.js"></script>
+
+         <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+         <script src="js/mains.js"></script>
+
+         </script>
        </head>
        <body>
          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -32,13 +52,16 @@ session_start();
              <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                <ul class="navbar-nav">
                  <li class="nav-item">
-                   <a class="nav-link active" href="customerInvoice.php">Invoice</a>
+                   <a class="nav-link" href="customerInvoice.php">Invoice</a>
                  </li>
                  <li class="nav-item">
-                   <a class="nav-link active" href="manageCart.php">Mycart</a>
+                   <a class="nav-link active" href="customerPanel.php">Products</a>
                  </li>
                  <li class="nav-item">
-                   <a class="nav-link active" href="index.php">Logout</a>
+                   <a class="nav-link " href="manageCart.php">Mycart</a>
+                 </li>
+                 <li class="nav-item">
+                   <a class="nav-link " href="index.php">Logout</a>
                  </li>
                </ul>
              </div>
@@ -74,9 +97,8 @@ session_start();
            } ?>
 
          </div>
-         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+         <script src="js/popper.js"></script>
+         <script src="js/bootstrap.min.js"></script>
        </body>
      </html>
    </body>

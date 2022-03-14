@@ -29,8 +29,8 @@
       header("location:bill.php?getId=$customerId");
     }
   }
-  if (isset($_GET['del'])) {
-    $id = $_GET['del'];
+  if (isset($_POST['deleteBtn'])) {
+    $id = $_POST['customerId'];
     $sql = "delete from customer where customer_id = '".$id."'";
     $result = mysqli_query($connection, $sql);
 

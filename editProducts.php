@@ -33,13 +33,10 @@
               <a class="nav-link active" aria-current="page" href="products.php">Products</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="customerList.php">Customers</a>
+              <a class="nav-link " href="customerList.php">Customers</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="#">Pricing</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active">Logout</a>
+              <a class="nav-link ">Logout</a>
             </li>
           </ul>
         </div>

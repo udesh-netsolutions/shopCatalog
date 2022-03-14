@@ -16,7 +16,7 @@
    <body class="">
      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
        <div class="container-fluid">
-         <a class="navbar-brand" href="admin.php">Admin</a>
+         <a class="navbar-brand" href="customerList.php">Admin</a>
          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
            <span class="navbar-toggler-icon"></span>
          </button>
@@ -63,7 +63,6 @@
              <th>Product price</th>
              <th>Product quantity</th>
              <th>Total Price</th>
-             <th>Operation</th>
            </tr>
          </thead>
          <tbody>
@@ -73,10 +72,6 @@
                <td>Rs. <?php echo $row["product_price"]; ?></td>
                <td><?php echo $row["quantity"]; $productAmount = $row["product_price"]*$row["quantity"]; $totalAmount += $productAmount?></td>
                <td>Rs. <?php echo  $productAmount;?></td>
-               <td>
-                 <input class="btn btn-sm btn-outline-warning"type="button" name="" value="Edit" onclick="location.href='editItemByAd.php?editItemId=<?php echo $row["id"] ?>'">
-                 <input class="btn btn-sm btn-outline-danger"type="button" name="" value="Remove" onclick="location.href='delete.php?removeItemByAd=<?php echo $row["id"] ?>'">
-               </td>
              </tr>
          <?php  } ?>
          </tbody>

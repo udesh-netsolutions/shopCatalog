@@ -40,10 +40,21 @@ session_start();
     if ($res) {
       // header("location:customerPanel.php");
       // echo '<script>alert("item added to cart")</script>';
-      echo "<script>
-        alert('Item added to cart');
-        window.location.href='customerPanel.php';
-        </script>";
+
+      // echo "<script>
+      //   alert('Item added to cart');
+      //   window.location.href='customerPanel.php';
+      //   </script>";
+
+    // echo '<script>
+    //   document.write("<div class='alert alert-success alert-dismissible'><a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a> <strong>Success!</strong> This alert box could indicate a successful or positive action.</div>");
+    //   </script>';
+
+
+      // echo "<script>setTimeout(\"location.href = 'customerPanel.php?itemAdded=true';\",0.1);</script>";
+
+      echo "<script>window.location.href = 'customerPanel.php?itemAdded=true';</script>";
+
     }
   }
 
@@ -53,6 +64,7 @@ session_start();
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   </head>
   <body>
@@ -65,26 +77,27 @@ session_start();
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="customerInvoice.php">Invoice</a>
+              <a class="nav-link " href="customerInvoice.php">Invoice</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="customerPanel.php">Products</a>
+              <a class="nav-link " href="customerPanel.php">Products</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" href="manageCart.php">Mycart</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="index.php">Logout</a>
+              <a class="nav-link " href="index.php">Logout</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-    <?php
-      $query = "select * from cart where customer_id = '".$_SESSION["customerId"]."'";
-      $res = mysqli_query($connection, $query);
-     ?>
     <div class="container">
+      <?php
+        $query = "select * from cart where customer_id = '".$_SESSION["customerId"]."'";
+        $res = mysqli_query($connection, $query);
+        if(mysqli_num_rows($res)>0) {
+       ?>
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
@@ -115,6 +128,16 @@ session_start();
       <form class="" action="manageCart.php?removeItemId=<?php echo $_SESSION["customerId"] ?>" method="post">
         <button class="btn btn-outline-dark" type="submit" name="removeRequest">Remove Request</button>
       </form>
+    <?php } else { ?>
+      <div class="container emptyCart">
+        <img src="images/emptyCart.jpg" alt="">
+        <h1>Your Cart is empty!</h1>
+        <p>Add items to it now</p>
+        <a class="btn btn-outline-dark" href="customerPanel.php">Shop now</a>
+      </div>
+
+    <?php } ?>
+
     </div>
 
 

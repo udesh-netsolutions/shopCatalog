@@ -20,6 +20,7 @@
          <title>Customer</title>
          <script src="https://kit.fontawesome.com/56c1183ec7.js" crossorigin="anonymous"></script>
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+         <link rel="stylesheet" href="styles.css">
        </head>
        <body>
          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -34,25 +35,28 @@
                    <a class="nav-link active" href="customerInvoice.php">Invoice</a>
                  </li>
                  <li class="nav-item">
-                   <a class="nav-link active" href="customerPanel.php">Products</a>
+                   <a class="nav-link" href="customerPanel.php">Products</a>
                  </li>
                  <li class="nav-item">
-                   <a class="nav-link active" href="manageCart.php">Mycart</a>
+                   <a class="nav-link" href="manageCart.php">Mycart</a>
                  </li>
                  <li class="nav-item">
-                   <a class="nav-link active" href="index.php">Logout</a>
+                   <a class="nav-link" href="index.php">Logout</a>
                  </li>
                </ul>
              </div>
            </div>
          </nav>
-     <h1 class="d-flex justify-content-center my-5">Invoice</h1>
-     <?php
-       $query = "select * from customer_bills where customer_id = '".$_SESSION["customerId"]."'";
-       $res = mysqli_query($connection, $query);
-       $totalAmount = 0;
-      ?>
      <div class="container">
+       <?php
+         $query = "select * from customer_bills where customer_id = '".$_SESSION["customerId"]."'";
+         $res = mysqli_query($connection, $query);
+         $totalAmount = 0;
+         if (mysqli_num_rows($res)>0) {?>
+       <h1 class="d-flex justify-content-center my-5">Invoice</h1>
+       <form class="" action="export.php" method="post">
+          <input class="btn btn-outline-dark" type="submit" name="export" value="Export CSV">
+       </form>
        <div class="d-flex justify-content-end">
          <h4 id="current_date"></h4>
            <script>
@@ -92,6 +96,12 @@
          <?php  } ?>
          </tbody>
        </table>
+     <?php  } else { ?>
+       <div class="container emptyCart">
+         <img src="images/emptyCart.jpg" alt="">
+         <h1>You didn't buy anything yet!</h1>
+       </div>
+     <?php } ?>
      </div>
 
 

@@ -38,9 +38,13 @@ if (!($password == $confirmPassword)) {
    $res = mysqli_query($connection, $insertQuery);
    if($res) {
      ?>
-     <script>
+     <!-- <script>
        alert("data submitted successful");
-     </script>
+     </script> -->
+      <div class="alert alert-success alert-dismissible fade show sucDiv" role="alert">
+       <strong>Customer Added Successfully!</strong>
+       <a href="" class="cross">X</a>
+      </div>
      <?php
 
    } else {
@@ -57,8 +61,16 @@ if (!($password == $confirmPassword)) {
 
 }
 
-  $selectQuery = "select * from customer where status = 0";
-  $query = mysqli_query($connection, $selectQuery);
+  $limit = 5;
+  if(isset($_GET["page"])){
+    $page = $_GET["page"];
+  } else {
+    $page = 1;
+  }
+
+  $offset = ($page-1) * $limit;
+  $selectQuery = "select * from customer where status = 0 limit {$offset}, {$limit}";
+  $query = mysqli_query($connection, $selectQuery) or die("query failed");
 
 
  ?>
@@ -66,7 +78,17 @@ if (!($password == $confirmPassword)) {
  <html lang="en" dir="ltr">
    <head>
      <meta charset="utf-8">
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+     	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+     	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+      <link rel="stylesheet" href="css/style.css">
+     	<link rel="stylesheet" href="styles.css">
+      <script src="js/main.js"></script>
      <title></title>
    </head>
    <body>
@@ -79,22 +101,23 @@ if (!($password == $confirmPassword)) {
          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
            <ul class="navbar-nav">
              <li class="nav-item">
-               <a class="nav-link active" aria-current="page" href="products.php">Products</a>
+               <a class="nav-link " aria-current="page" href="products.php">Products</a>
              </li>
              <li class="nav-item">
                <a class="nav-link active" href="customerList.php">Customers</a>
              </li>
              <li class="nav-item">
-               <a class="nav-link active" href="#">Pricing</a>
-             </li>
-             <li class="nav-item">
-               <a class="nav-link active" href="index.php">Logout</a>
+               <a class="nav-link " href="index.php">Logout</a>
              </li>
            </ul>
          </div>
        </div>
      </nav>
      <div class="container">
+       <h1 class="d-flex">All Customers</h1>
+       <form class="d-flex justify-content-end my-2" action="addCustomer.php" method="">
+         <button class="btn btn-primary" type="" name="button">Add more customers</button>
+       </form>
        <table class="table table-bordered table-striped">
          <thead>
            <tr>
@@ -114,8 +137,11 @@ if (!($password == $confirmPassword)) {
              <td><?php echo $res['email']; ?></td>
              <td><?php echo $res['mobile']; ?></td>
                <td>
-
-                <input class="btn btn-outline-primary" type="button" onclick="location.href='delete.php?del=<?php echo $res['customer_id'] ?>';" value="Delete" />
+                 <!-- Button trigger modal -->
+                 <button type="button" class="btn btn-primary deleteBtn" data-toggle="modal" data-target="#deleteUserModal" value="<?php echo $res['customer_id']; ?>">
+                   Delete
+                 </button>
+                <!-- <input class="btn btn-outline-primary" type="button" onclick="location.href='delete.php?del=<?php echo $res['customer_id'] ?>';" value="Delete" /> -->
                 <input class="btn btn-outline-primary" type="button" onclick="location.href='edit.php?getId=<?php echo $res['customer_id'] ?>';" value="Edit" />
                 <?php
                 $result = $connection->query("select * from cart where customer_id = '".$res['customer_id']."' and request = 'Requested'");
@@ -135,15 +161,69 @@ if (!($password == $confirmPassword)) {
            </tr>
          </tbody>
        </table>
-       <form class="" action="addCustomer.php" method="">
-         <button class="btn btn-primary" type="" name="button">Add more customers</button>
-       </form>
+       <?php
+          $sql1 = "select * from customer where status = 0";
+          $result1 = mysqli_query($connection, $sql1);
+
+          if (mysqli_num_rows($result1)>0) {
+            $totalRecords = mysqli_num_rows($result1);
+            $totalPages = ceil($totalRecords/$limit);
+
+            echo '<nav aria-label="Page navigation example">
+                  <ul class="pagination">
+                  <li class="page-item"><a class="page-link" href="#">Previous</a></li>';
+            for($i=1; $i<=$totalPages; $i++) {
+              if ($i == $page) {
+                $active = "active";
+              } else {
+                $active = "";
+              }
+
+              echo '<li class="page-item '.$active.'"><a class="page-link" href="customerList.php?page='.$i.'">'.$i.'</a></li>';
+            }
+            echo "</ul></nav>";
+          }
+        ?>
      </div>
 
 
 
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+<!-- Modal -->
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete customer</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="" action="delete.php" method="post">
+        <input type="hidden" name="customerId" class="userId">
+        <div class="modal-body">
+          Are you sure!
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" name="deleteBtn" class="btn btn-primary">Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+    <script>
+      $(document).ready(function() {
+        $('.deleteBtn').click(function() {
+
+          let customer_id = $(this).val();
+
+          $('.userId').val(customer_id);
+        });
+      });
+    </script>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
    </body>
  </html>

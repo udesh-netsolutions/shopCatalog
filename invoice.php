@@ -218,6 +218,8 @@
     $status = 0;
   } else {
     $status = 1;
+    $query = "delete from cart where customer_id = '".$customerId."'";
+    $res = mysqli_query($connection, $query);
   }
   $sql = "update customer_bills set status = '".$status."' where invoice_id = '".$invoiceId."'";
   $res = mysqli_query($connection, $sql);
