@@ -1,5 +1,6 @@
 <?php
   include "connection.php";
+  session_start();
 
   $id = $_GET["getId"];
 
@@ -7,44 +8,57 @@
 
  <!DOCTYPE html>
  <html lang="en" dir="ltr">
-   <head>
-     <meta charset="utf-8">
-     <title></title>
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-     <link rel="stylesheet" href="style.css">
-   </head>
-   <body class="">
-     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-       <div class="container-fluid">
-         <a class="navbar-brand" href="customerList.php">Admin</a>
-         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-           <span class="navbar-toggler-icon"></span>
-         </button>
-         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-           <ul class="navbar-nav">
-             <li class="nav-item">
-               <a class="nav-link active" aria-current="page" href="products.php">Products</a>
-             </li>
-             <li class="nav-item">
-               <a class="nav-link active" href="customerList.php">Customers</a>
-             </li>
-             <li class="nav-item">
-               <a class="nav-link active" href="#">Pricing</a>
-             </li>
-             <li class="nav-item">
-               <a class="nav-link active" href="index.php">Logout</a>
-             </li>
-           </ul>
-         </div>
+ <head>
+   <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://kit.fontawesome.com/56c1183ec7.js" crossorigin="anonymous"></script>
+
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="styles.css">
+   <title></title>
+ </head>
+   <body>
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark horizontal-nav">
+         <a class="navbar-brand" href="#">
+           <img src="images/logo.png" alt="logo" width="200" height="150">
+         </a>
+         <a class="navbar-brand navbar-name" href="">Admin,<?php echo $_SESSION["firstName"]; ?></a>
        </div>
      </nav>
-     <h1 class="d-flex justify-content-center my-5">Invoice</h1>
+       <div class="vertical-nav" id="sidebar">
+        <div class="py-4 px-3 mb-4">
+          <div class="sidebar">
+            <ul>
+              <li class="">
+                <a class="sidebarLinks" href="products.php">Products</a>
+              </li>
+              <li class="">
+                <a class="sidebarLinks" href="customerList.php">Customers</a>
+              </li>
+              <li class="logoutLink">
+                <a class="sidebarLinks " href="index.php">Logout <img src="images/login.png" alt="logout"></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+       </div>
+       <div class="page-content">
+         <h1 class="d-flex justify-content-center my-5">Invoice</h1>
+       </div>
      <?php
        $query = "select * from cart where customer_id = '".$id."'";
        $res = mysqli_query($connection, $query);
        $totalAmount = 0;
       ?>
-     <div class="container">
+     <div class="container page-content">
        <div class="d-flex justify-content-end">
          <h4 id="current_date"></h4>
            <script>

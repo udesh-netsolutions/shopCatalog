@@ -1,3 +1,7 @@
+<?php
+  session_start();
+ ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -21,31 +25,35 @@
 
 	</head>
 	<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="customerList.php">Admin</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="products.php">Products</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="customerList.php">Customers</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="#">Pricing</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="index.php">Logout</a>
-            </li>
-          </ul>
-        </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark horizontal-nav">
+        <a class="navbar-brand" href="#">
+          <img src="images/logo.png" alt="logo" width="200" height="150">
+        </a>
+        <a class="navbar-brand navbar-name" href="">Admin,<?php echo $_SESSION["firstName"]; ?></a>
       </div>
     </nav>
-	<section class="ftco-section">
+      <div class="vertical-nav" id="sidebar">
+       <div class="py-4 px-3 mb-4">
+         <div class="sidebar">
+           <ul>
+             <li class="">
+               <a class="sidebarLinks" href="products.php">Products</a>
+             </li>
+             <li class="">
+               <a class="sidebarLinks" href="customerList.php">Customers</a>
+               <ul class="sublink">
+                 <li class="activeSideLink">
+                   <a href="#">Add Customer</a>
+                 </li>
+             </li>
+             <li class="logoutLink">
+               <a class="sidebarLinks " href="index.php">Logout <img src="images/login.png" alt="logout"></a>
+             </li>
+           </ul>
+         </div>
+       </div>
+      </div>
+	<section class="ftco-section page-content">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-md-6 col-lg-5">

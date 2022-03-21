@@ -38,20 +38,6 @@ session_start();
     $query = "insert into cart (customer_id, product_id, product_name, product_price, quantity) values ('".$_SESSION["customerId"]."', '".$_SESSION['cart']['productId']."', '".$_SESSION['cart']['name']."', '".$_SESSION['cart']['price']."', '".$_SESSION['cart']['quantity']."')";
     $res = mysqli_query($connection, $query);
     if ($res) {
-      // header("location:customerPanel.php");
-      // echo '<script>alert("item added to cart")</script>';
-
-      // echo "<script>
-      //   alert('Item added to cart');
-      //   window.location.href='customerPanel.php';
-      //   </script>";
-
-    // echo '<script>
-    //   document.write("<div class='alert alert-success alert-dismissible'><a href='' class='close' data-dismiss='alert' aria-label='close'>&times;</a> <strong>Success!</strong> This alert box could indicate a successful or positive action.</div>");
-    //   </script>';
-
-
-      // echo "<script>setTimeout(\"location.href = 'customerPanel.php?itemAdded=true';\",0.1);</script>";
 
       echo "<script>window.location.href = 'customerPanel.php?itemAdded=true';</script>";
 
@@ -64,7 +50,7 @@ session_start();
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   </head>
   <body>
@@ -83,7 +69,7 @@ session_start();
               <a class="nav-link " href="customerPanel.php">Products</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="manageCart.php">Mycart</a>
+              <a class="nav-link active activeLinks" href="manageCart.php">Mycart</a>
             </li>
             <li class="nav-item">
               <a class="nav-link " href="index.php">Logout</a>

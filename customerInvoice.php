@@ -32,7 +32,7 @@
              <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                <ul class="navbar-nav">
                  <li class="nav-item">
-                   <a class="nav-link active" href="customerInvoice.php">Invoice</a>
+                   <a class="nav-link active activeLinks" href="customerInvoice.php">Invoice</a>
                  </li>
                  <li class="nav-item">
                    <a class="nav-link" href="customerPanel.php">Products</a>

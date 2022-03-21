@@ -26,6 +26,7 @@
         $row = mysqli_fetch_assoc($result);
         if ($row['email'] === $email && $row['password'] === $password && $row["status"] == true) {
           session_start();
+          $_SESSION["firstName"] = $row["first_name"];
           $_SESSION["customerId"] = $row["customer_id"];
           $_SESSION["email"] = $row["email"];
           $_SESSION["status"] = $row["status"];

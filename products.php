@@ -1,6 +1,6 @@
 <?php
   include "connection.php";
-
+  session_start();
 
   if(isset($_GET["getId"])) {
     $id = $_GET["getId"];
@@ -27,33 +27,46 @@
 
   	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  	<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
+  	<link rel="stylesheet" href="styles.css">
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
     <title></title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark horizontal-nav">
+      <!-- <div class="container-fluid d-flex justify-content-between">
         <a class="navbar-brand" href="admin.php">Admin</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="products.php">Products</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="customerList.php">Customers</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="index.php">Logout</a>
-            </li>
-          </ul>
-        </div>
+        </button> -->
+        <a class="navbar-brand" href="#">
+          <img src="images/logo.png" alt="logo" width="200" height="150">
+        </a>
+        <a class="navbar-brand navbar-name" href="">Admin,<?php echo $_SESSION["firstName"]; ?></a>
       </div>
     </nav>
-    <div class="container">
+      <div class="vertical-nav" id="sidebar">
+       <div class="py-4 px-3 mb-4">
+         <div class="sidebar">
+           <ul>
+             <li class="activeSideLink">
+               <a class="sidebarLinks" href="products.php">Products</a>
+             </li>
+             <li class="">
+               <a class="sidebarLinks" href="customerList.php">Customers</a>
+             </li>
+             <li class="logoutLink">
+               <a class="sidebarLinks " href="index.php">Logout <img src="images/login.png" alt="logout"></a>
+             </li>
+           </ul>
+         </div>
+       </div>
+      </div>
+    <div class="container page-content">
+      <h1 class="d-flex">Products</h1>
+      <form class="d-flex justify-content-end my-2" action="addProducts.php" method="">
+        <button class="btn btn-primary" type="" name="button">Add Products</button>
+      </form>
       <table class="table">
         <thead>
           <tr>
@@ -74,21 +87,17 @@
             <td><?php echo $row['product_price']; ?></td>
             <td>
               <input class="btn btn-outline-dark" type="button" onclick="location.href='delete.php?deleteProduct=<?php echo $row['product_id'] ?>';" value="Delete"/>
-              <input class="btn btn-outline-dark" type="button" onclick="location.href='editProducts.php?getId=<?php echo $row['product_id'] ?>';" value="  Edit  " />
+              <input class="btn btn-outline-dark my-2" type="button" onclick="location.href='editProducts.php?getId=<?php echo $row['product_id'] ?>';" value="  Edit  " />
             </td>
           </tr>
          <?php  } ?>
         </tbody>
       </table>
-      <input class="btn btn-primary" type="button" onclick="location.href='addProducts.php'" name="" value="Add Products">
     </div>
 
 
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script> -->
   </body>
 </html>

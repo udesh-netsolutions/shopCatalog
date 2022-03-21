@@ -42,12 +42,15 @@
   } else {
     if(isset($_POST["updateProduct"])) {
       $id = $_GET["id"];
-      $productImage = $_POST["img"];
+      $imgName = $_FILES["img"]["name"];
+      $tmpName = $_FILES["img"]["tmp_name"];
+      $folder = "images/" . $imgName;
+      move_uploaded_file($tmpName, $folder);
       $productTitle = $_POST["title"];
       $productDesc = $_POST["productDesc"];
       $productPrice = $_POST["price"];
 
-      $query = "update products set product_image = '".$productImage."', product_title = '".$productTitle."',product_desc = '".$productDesc."',product_price = '".$productPrice."' where product_id = '".$id."'";
+      $query = "update products set product_image = '".$folder."', product_title = '".$productTitle."',product_desc = '".$productDesc."',product_price = '".$productPrice."' where product_id = '".$id."'";
       $res = mysqli_query($connection, $query);
 
       if($res) {

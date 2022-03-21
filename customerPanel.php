@@ -55,7 +55,7 @@ session_start();
                    <a class="nav-link" href="customerInvoice.php">Invoice</a>
                  </li>
                  <li class="nav-item">
-                   <a class="nav-link active" href="customerPanel.php">Products</a>
+                   <a class="nav-link active activeLinks" href="customerPanel.php">Products</a>
                  </li>
                  <li class="nav-item">
                    <a class="nav-link " href="manageCart.php">Mycart</a>
@@ -84,7 +84,7 @@ session_start();
                       <input type="hidden" name="productName" value="<?php echo $row["product_title"] ?>">
                       <input type="hidden" name="productDesc" value="<?php echo $row["product_desc"] ?>">
                       <input type="hidden" name="productPrice" value=<?php echo $row["product_price"] ?>>
-                      <button class="btn btn-dark" type="submit" name="button">Add to cart</button>
+                      <button class="btn btn-dark my-3" type="submit" name="button">Add to cart</button>
 
                      </div>
                    </div>

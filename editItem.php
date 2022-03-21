@@ -4,38 +4,7 @@
 
   $id = $_GET["editItemId"];
 
-  // if(isset($_POST["update"])) {
-  //   if(isset($_SESSION["status"])) {
-  //     if($_SESSION["status"] == true) {
-  //       print_r($_SESSION["status"]);
-  //       exit();
-  //       $quantity = $_POST["quantity"];
-  //       $query = "update cart set quantity = '".$quantity."' where id = '".$id."'";
-  //       $res = mysqli_query($connection, $query);
-  //       if($res) {
-  //         header("location:bill.php");
-  //       }
-  //     } else {
-  //       $quantity = $_POST["quantity"];
-  //       $query = "update cart set quantity = '".$quantity."' where id = '".$id."'";
-  //       $res = mysqli_query($connection, $query);
-  //       if($res) {
-  //         header("location:manageCart.php");
-  //       }
-  //     }
-  //   }
-  // }
 
-  // if(isset($_SESSION["status"])) {
-  //   if($_SESSION["status"] == 0) {
-  //     $quantity = $_POST["quantity"];
-  //     $query = "update cart set quantity = '".$quantity."' where id = '".$id."'";
-  //     $res = mysqli_query($connection, $query);
-  //     if($res) {
-  //       header("location:manageCart.php");
-  //     }
-  //   }
-  // }
 
   if (isset($_POST["update"])) {
     $quantity = $_POST["quantity"];

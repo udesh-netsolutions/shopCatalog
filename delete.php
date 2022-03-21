@@ -35,7 +35,7 @@
     $result = mysqli_query($connection, $sql);
 
     if($result) {
-      header("location:customerList.php");
+      header("location:customerList.php?customerDeleted=true");
     } else {
       echo "something went wrong";
     }

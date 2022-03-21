@@ -25,19 +25,6 @@
      $canLogin = false;
      $emailError = "Invalid email";
    }
-  // function checkMail($email) {
-  //   $sql = "select * from customer where email = '".$email."'";
-  //   $res = mysqli_query($connection, $sql);
-  //   print_r($res);
-  //   exit();
-  //   if (mysqli_num_rows($res)==1) {
-  //     $error="This email is used ";
-  //     $canLogin = false;
-  //   } else {
-  //     $canLogin = true;
-  //   }
-  // }
-  // checkMail($email);
   if ($canLogin) {
     $insertQuery = "insert into customer (first_name, Last_name, email, password, mobile) values ( '".$firstName."', '".$lastName."', '".$email."', '".$password."', '".$mobile."')";
 
