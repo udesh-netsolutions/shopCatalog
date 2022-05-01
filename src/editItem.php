@@ -24,8 +24,24 @@
  <html lang="en" dir="ltr">
    <head>
      <meta charset="utf-8">
-     <title></title>
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+     <title>Customer</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="styles.css">
+
+     <script src="js/jquery.min.js"></script>
+
+     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+
+     <script src="js/mains.js"></script>
+
 
    </head>
    <body style="background-color: #777777;">
@@ -38,10 +54,16 @@
          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
            <ul class="navbar-nav">
              <li class="nav-item">
-               <a class="nav-link active" href="manageCart.php">Mycart</a>
+               <a class="nav-link" href="customerInvoice.php">Invoice</a>
              </li>
              <li class="nav-item">
-               <a class="nav-link active" href="index.php">Logout</a>
+               <a class="nav-link" href="customerPanel.php">Products</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link " href="manageCart.php">Mycart</a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link " href="index.php">Logout</a>
              </li>
            </ul>
          </div>
@@ -49,7 +71,7 @@
      </nav>
      <h1 class="d-flex justify-content-center my-5">PLEASE UPDATE YOUR CART DETAILS</h1>
      <div class="container d-flex justify-content-center mt-5 text-white w-25 h-25 rounded">
-       <form class="" action="editItem.php?editItemId=<?php echo $id ?>" method="post">
+       <form id="validateQuantity" class="" action="editItem.php?editItemId=<?php echo $id ?>" method="post">
          <label for="">Product Name: </label><br>
          <input class="my-2 rounded" type="text" name="" value="<?php echo $row["product_name"] ?>" readonly><br>
          <label for="">Product Price: </label><br>

@@ -30,7 +30,7 @@
      <title></title>
    </head>
      <body class="">
-       <nav class="navbar navbar-expand-lg navbar-dark bg-dark horizontal-nav">
+       <nav aria-label="" class="navbar navbar-expand-lg navbar-dark bg-dark horizontal-nav">
            <a class="navbar-brand" href="#">
              <img src="images/logo.png" alt="logo" width="200" height="150">
            </a>
@@ -152,7 +152,7 @@
     <title></title>
   </head>
     <body class="">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark horizontal-nav">
+      <nav aria-label="" class="navbar navbar-expand-lg navbar-dark bg-dark horizontal-nav">
           <a class="navbar-brand" href="#">
             <img src="images/logo.png" alt="logo" width="200" height="150">
           </a>
@@ -224,19 +224,46 @@
                   echo "Paid";
                 } ?></td>
                 <td>
-                  <form class="" action="invoice.php?invoiceId=<?php echo $row["invoice_id"]; ?>" method="post">
-                    <select class="" name="status">
-                      <option value="">Status:-</option>
-                      <option  value="Paid">Paid</option>
-                      <option value="Pending">Pending</option>
-                    </select>
-                    <button class="btn btn-sm btn-dark" type="submit" name="setStatus">Set</button>
-                  </form>
+                  <?php
+                    if ($row["status"] == 0) { ?>
+                      <form class="" action="invoice.php?invoiceId=<?php echo $row["invoice_id"]; ?>" method="post">
+                        <select class="" name="status">
+                          <option value="">Status:-</option>
+                          <option  value="Paid">Paid</option>
+                        </select>
+                        <button class="btn btn-sm btn-dark" type="submit" data-toggle="modal" data-target="#paymentModal" name="setStatus">Set</button>
+                      </form>
+                  <?php  } else {
+                    // echo $row["status"];
+                  } ?>
                 </td>
               </tr>
           <?php  } ?>
           </tbody>
         </table>
+      </div>
+        <!-- modal for payment status -->
+      <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Delete customer</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form class="" action="delete.php" method="post">
+              <input type="hidden" name="customerId" class="userId">
+              <div class="modal-body">
+                Are you sure!
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" name="deleteBtn" class="btn btn-primary">Delete</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
 

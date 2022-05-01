@@ -39,10 +39,40 @@ $("#validateCustomer").validate({
       minlength: "Please enter password of minimum length of 6 characters",
       equalTo: "Password doesnot match"
     }
+  },
+  submitHandler: function(form) {
+    form.submit();
   }
   });
 });
 
+
+jQuery.validator.addMethod("amount", function(value, element) {
+    return this.optional(element) || (parseFloat(value) > 0);
+	}, "number should be greater than 0");
+$(document).ready(function() {
+  $("#validateQuantity").validate({
+    rules: {
+      quantity: {
+        required: true,
+        amount : { amount : true },
+        step: 1,
+        number: true
+      }
+
+    },
+    messages: {
+      quantity: {
+        required: "This field is required",
+        step: "Number should be interger only",
+        number: "Please enter only number"
+      }
+    },
+    submitHandler: function (form) {
+         form.submit();
+          }
+  });
+});
 
 document.addEventListener("DOMContentLoaded", function(event) {
 

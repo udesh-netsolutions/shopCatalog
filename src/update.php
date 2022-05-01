@@ -18,7 +18,7 @@
       $passwordError = "password must be greater than 6 characters";
       $canLogin=false;
     }
-    if (!($password == $confirmPassword)) {
+    if ($password != $confirmPassword) {
       $confirmPasswordError = "password does not match";
       $canLogin=false;
     }
@@ -55,8 +55,6 @@
 
       if($res) {
         header("location:products.php");
-      } else {
-
       }
     }
   }

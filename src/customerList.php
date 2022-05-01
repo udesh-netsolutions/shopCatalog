@@ -20,7 +20,7 @@ if (strlen($password) < 6) {
   $passwordError = "password must be greater than 6 characters";
   $canLogin=false;
 }
-if (!($password == $confirmPassword)) {
+if ($password != $confirmPassword) {
   $confirmPasswordError = "password does not match";
   $canLogin=false;
 }
@@ -144,7 +144,7 @@ if (!($password == $confirmPassword)) {
              </tr>
            </thead>
            <tbody>
-             <?php   while($res = mysqli_fetch_array($query)) {?>
+             <?php while($res = mysqli_fetch_array($query)) {?>
 
              <tr>
                <td><?php echo $res['first_name']; ?></td>

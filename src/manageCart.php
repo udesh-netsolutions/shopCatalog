@@ -50,8 +50,14 @@ session_start();
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+  	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="css/style.css">
+  	<link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -87,33 +93,62 @@ session_start();
       <table class="table table-bordered table-striped">
         <thead>
           <tr>
+            <th>Sr.No</th>
             <th>Product Name</th>
             <th>Product price</th>
             <th>Product quantity</th>
+            <th>Total Price</th>
             <th>Operation</th>
           </tr>
         </thead>
         <tbody>
-          <?php while($row = mysqli_fetch_assoc($res)) { ?>
+          <?php $count = 1;
+                $totalAmount = 0;
+                $request = true;
+                while($row = mysqli_fetch_assoc($res)) { ?>
             <tr>
+              <td><?php echo $count; ?></td>
               <td><?php echo $row["product_name"]; ?></td>
               <td>Rs. <?php echo $row["product_price"]; ?></td>
               <td><?php echo $row["quantity"]; ?></td>
+              <td><?php echo $row['product_price']*$row['quantity']; ?></td>
               <td>
                 <input class="btn btn-sm btn-warning"type="button" name="" value="Edit" onclick="location.href='editItem.php?editItemId=<?php echo $row["id"] ?>'">
                 <input class="btn btn-sm btn-danger"type="button" name="" value="Remove" onclick="location.href='delete.php?removeItemId=<?php echo $row["id"] ?>'">
-                <?php echo $row["request"]; ?>
+                <?php if($row["request"] != "Requested") {
+                  $request = false;
+                } ?>
               </td>
             </tr>
-        <?php  } ?>
+        <?php
+          $totalAmount += ($row["product_price"]*$row["quantity"]);
+          $count++;  
+          } ?>
         </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total Amount:- Rs.<?php echo $totalAmount; ?></td>
+          </tr>
+        </tfoot>
       </table>
-      <form class="" action="manageCart.php?removeItemId=<?php echo $_SESSION["customerId"] ?>" method="post">
-        <button class="btn btn-dark" type="submit" name="request">Request Bill</button>
-      </form>
-      <form class="" action="manageCart.php?removeItemId=<?php echo $_SESSION["customerId"] ?>" method="post">
-        <button class="btn btn-outline-dark" type="submit" name="removeRequest">Remove Request</button>
-      </form>
+      <?php
+        if($request) { ?>
+          <h2 style="text-align:center;">Bill Requested</h2>
+          <form class="" action="manageCart.php?removeItemId=<?php echo $_SESSION["customerId"] ?>" method="post">
+            <button class="btn btn-outline-info" type="submit" name="removeRequest">Remove Request</button>
+          </form>
+      <?php } else { ?>
+          <form class="" action="manageCart.php?removeItemId=<?php echo $_SESSION["customerId"] ?>" method="post">
+            <button class="btn btn-outline-dark" type="submit" name="request">Request Bill</button>
+          </form>
+      <?php  }
+       ?>
+
+
     <?php } else { ?>
       <div class="container emptyCart">
         <img src="images/emptyCart.jpg" alt="">

@@ -40,7 +40,6 @@ session_start();
 
          <script src="js/mains.js"></script>
 
-         </script>
        </head>
        <body>
          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -70,7 +69,7 @@ session_start();
          <div class="container">
            <?php if(mysqli_num_rows($res)>0) {
              while($row = mysqli_fetch_assoc($res)) { ?>
-               <form class="" action="manageCart.php?productId=<?php echo $row["product_id"] ?>" method="post">
+               <form id="validateQuantity" class="productItem" action="manageCart.php?productId=<?php echo $row["product_id"] ?>" method="post">
                  <div class="card w-75 mt-4 mx-5">
                    <div class="row d-flex">
                      <div class="col-md-4">
@@ -80,11 +79,19 @@ session_start();
                       <h3><?php echo $row["product_title"];?></h3>
                       <p><?php echo $row["product_desc"];?></p>
                       <h5>Rs.<?php echo $row["product_price"];?></h5>
-                      <input type="number" name="quantity" min="1" value="1" class="form-control w-25">
-                      <input type="hidden" name="productName" value="<?php echo $row["product_title"] ?>">
-                      <input type="hidden" name="productDesc" value="<?php echo $row["product_desc"] ?>">
-                      <input type="hidden" name="productPrice" value=<?php echo $row["product_price"] ?>>
-                      <button class="btn btn-dark my-3" type="submit" name="button">Add to cart</button>
+                        <div class="form-group">
+                          <input  id="quantity" type="number" name="quantity" min="1" value="1" class="form-control w-25">
+                        </div>
+                        <div class="form-group">
+                          <input class="form-control" type="hidden" name="productName" value="<?php echo $row["product_title"] ?>">
+                        </div>
+                        <div class="form-group">
+                          <input class="form-control" type="hidden" name="productDesc" value="<?php echo $row["product_desc"] ?>">
+                        </div>
+                        <div class="form-group">
+                          <input class="form-control" type="hidden" name="productPrice" value=<?php echo $row["product_price"] ?>>
+                        </div>
+                      <input class="btn btn-dark my-3" value="Add to cart" type="submit" name="button">
 
                      </div>
                    </div>
@@ -97,7 +104,7 @@ session_start();
            } ?>
 
          </div>
-         <script src="js/popper.js"></script>
+         <!-- <script src="js/popper.js"></script> -->
          <script src="js/bootstrap.min.js"></script>
        </body>
      </html>

@@ -51,12 +51,13 @@
         </div>
        </div>
        <div class="page-content">
-         <h1 class="d-flex justify-content-center my-5">Invoice</h1>
+         <h1 class="d-flex justify-content-center my-5">Invoice No. <?php echo rand(100, 1000); ?></h1>
        </div>
      <?php
        $query = "select * from cart where customer_id = '".$id."'";
        $res = mysqli_query($connection, $query);
        $totalAmount = 0;
+       $count = 1;
       ?>
      <div class="container page-content">
        <div class="d-flex justify-content-end">
@@ -73,6 +74,7 @@
        <table class="table table-bordered table-striped">
          <thead>
            <tr>
+             <th>Sr No.</th>
              <th>Product Name</th>
              <th>Product price</th>
              <th>Product quantity</th>
@@ -82,14 +84,17 @@
          <tbody>
            <?php while($row = mysqli_fetch_assoc($res)) { ?>
              <tr>
+               <td><?php echo $count; ?></td>
                <td><?php echo $row["product_name"]; ?></td>
                <td>Rs. <?php echo $row["product_price"]; ?></td>
                <td><?php echo $row["quantity"]; $productAmount = $row["product_price"]*$row["quantity"]; $totalAmount += $productAmount?></td>
                <td>Rs. <?php echo  $productAmount;?></td>
              </tr>
-         <?php  } ?>
+         <?php $count++; 
+        } ?>
          </tbody>
          <tfoot>
+           <td></td>
            <td></td>
            <td></td>
            <td></td>
